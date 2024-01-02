@@ -15,13 +15,21 @@ const Buttons = ({
       >
         Previous
       </button>
-      <button
+      {currentQuestion !== questions.length - 1?<button
         className="w-[20%] btn btn-primary text-lg rounded-lg"
         onClick={handleNext}
-        disabled={currentQuestion === questions.length-1}
       >
         Next
+      </button>:
+      <button
+        className="w-[20%] btn btn-success text-lg rounded-lg"
+        
+      >
+        Submit Answer
       </button>
+      
+    }
+      
     </div>
   );
 };
