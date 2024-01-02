@@ -1,31 +1,40 @@
-import React, { useState } from "react";
-import questions from "../../Data/questions.json";
-import Option from "./Option";
+import React, { useEffect } from "react";
+import Option from './Option'
 
-const Question = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleOptionChange = (index) => {
-    setSelectedOption(index);
-  };
-
+// Question component
+const Question = ({
+  questions,
+  currentQuestion,
+  handleAnswerOption,
+  selectedOptions,
+}) => {
   return (
     <>
-      <h4 className="mt-10 text-base text-base-content">Question 1 of 5</h4>
+      <h4 className="mt-10 text-base text-base-content">
+        Question {currentQuestion + 1} of {questions?.length}
+      </h4>
       <div className="mt-4 text-2xl font-medium text-base-content">
-        What type of framework is Next.js?
-          </div>
-          <hr className="w-full mt-2 h-1" />
+        {questions[currentQuestion]?.question}
+      </div>
+      <hr className="w-full mt-2 h-1" />
       <div className="my-6 w-full grid grid-cols-2 grid-rows-2 gap-6">
-        {questions[0].answerOptions.map((answer, index) => (
+        {questions[currentQuestion]?.incorrect_answers.map((answer, index) => (
           <Option
             key={index}
-            id={index}
+            id={`op${index}`}  // Use a unique id for each option
             answer={answer}
-            isSelected={selectedOption === index}
-            onOptionChange={() => handleOptionChange(index)}
+            handleAnswerOption={handleAnswerOption}
+            selectedOptions={selectedOptions}
+            currentQuestion={currentQuestion}
           />
         ))}
+        <Option
+          id={`op${questions[currentQuestion]?.incorrect_answers.length}`}  // Unique id for the correct answer
+          answer={questions[currentQuestion]?.correct_answer}
+          handleAnswerOption={handleAnswerOption}
+          selectedOptions={selectedOptions}
+          currentQuestion={currentQuestion}
+        />
       </div>
     </>
   );
