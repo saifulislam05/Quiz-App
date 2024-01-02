@@ -91,27 +91,31 @@ const Body = () => {
 
   return (
     <div className="flex flex-col h-[90vh] justify-center items-center">
-      {
-        showScore ?<Result
-        score={score}
-        questions={questions}
-        showScore={showScore}
-        closeModal={closeModal}
-      />: <div className="flex flex-col items-start w-11/12 mx-auto">
-        <Question
+      {showScore ? (
+        <Result
+          score={score}
           questions={questions}
-          currentQuestion={currentQuestion}
-          handleAnswerOption={handleAnswerOption}
-          selectedOptions={selectedOptions}
+          showScore={showScore}
+          closeModal={closeModal}
         />
-        <Buttons
-          questions={questions}
-          currentQuestion={currentQuestion}
-          handlePrevious={handlePrevious}
-          handleNext={handleNext}
-          submitAnswer={submitAnswer}
-        />
-      </div> }
+      ) : (
+        <div className="flex flex-col items-start w-11/12 mx-auto">
+          <Question
+            questions={questions}
+            currentQuestion={currentQuestion}
+            handleAnswerOption={handleAnswerOption}
+            selectedOptions={selectedOptions}
+            handleNext={handleNext}
+          />
+          <Buttons
+            questions={questions}
+            currentQuestion={currentQuestion}
+            handlePrevious={handlePrevious}
+            handleNext={handleNext}
+            submitAnswer={submitAnswer}
+          />
+        </div>
+      )}
     </div>
   );
 };
