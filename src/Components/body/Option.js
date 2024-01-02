@@ -1,6 +1,5 @@
 import React from "react";
-
-// Option component
+ 
 const Option = ({
   id,
   answer,
@@ -11,18 +10,19 @@ const Option = ({
 
   const isAnswerSelected =
     answer === selectedOptions.find((item) => item.id === currentQuestion)?.answerByUser;
-console.log(selectedOptions);
   return (
     <label
       className={`form-control p-2 flex items-center w-full border-2 cursor-pointer rounded-xl ${
-        isAnswerSelected? "bg-success text-success-content"
+        isAnswerSelected
+          ? "bg-success text-success-content"
           : "text-neutral-content"
       }`}
+      onClick={() => handleAnswerOption(answer)}
     >
       <div className="label cursor-pointer">
         <input
           type="radio"
-          name={`option${currentQuestion}`} // Use a unique name for each question
+          name={`option${currentQuestion}`} 
           id={id}
           className="radio checked:bg-blue-500 hidden"
           checked={isAnswerSelected}
